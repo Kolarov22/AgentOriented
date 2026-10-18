@@ -7,26 +7,27 @@ public enum Direction {
     WEST(0, -1);
 
     public final int dr, dc;
-    public Direction left;
-    public Direction right;
 
     Direction(int dr, int dc) {
         this.dr = dr;
         this.dc = dc;
     }
 
-    static {
-        NORTH.left = WEST;  NORTH.right = EAST;
-        EAST.left  = NORTH; EAST.right  = SOUTH;
-        SOUTH.left = EAST;  SOUTH.right = WEST;
-        WEST.left  = SOUTH; WEST.right  = NORTH;
+    public Direction turnRight() {
+        return switch (this) {
+            case NORTH -> EAST;
+            case EAST -> SOUTH;
+            case SOUTH -> WEST;
+            case WEST -> NORTH;
+        };
     }
 
     public Direction turnLeft() {
-        return left;
-    }
-
-    public Direction turnRight() {
-        return right;
+        return switch (this) {
+            case NORTH -> WEST;
+            case WEST -> SOUTH;
+            case SOUTH -> EAST;
+            case EAST -> NORTH;
+        };
     }
 }

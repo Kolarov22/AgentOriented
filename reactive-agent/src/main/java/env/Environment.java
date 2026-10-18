@@ -17,7 +17,7 @@ public class Environment {
     private int agentR = 0;
     private int agentC = 0;
     private Direction agentDir = Direction.EAST;
-    private int score = 0;
+    private double score = 0;
 
     public Environment(int n, int obstacleCount, int objectCount) {
         this.n = n;
@@ -124,7 +124,11 @@ public class Environment {
         return remainingObjects == 0 && agentR == 0 && agentC == 0;
     }
 
-    public int getScore() { return score; }
+    public double getScore() { return score; }
+
+    public void applyMemoryPenalty(int entriesCount) {
+        this.score -= entriesCount * 0.1;
+    }
 
     public void printState() {
         System.out.println("\n--- Grid State ---");
